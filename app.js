@@ -1,5 +1,5 @@
 const express = require("express")
-const Comment = require("./schema/comment")
+const {Comment} = require("./schema")
 
 const app = express()
 app.use(express.json())

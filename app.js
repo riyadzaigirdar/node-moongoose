@@ -1,20 +1,9 @@
 const express = require("express")
-const mongoose = require("mongoose")
-mongoose.connect("mongodb://localhost:27017/post", { useNewUrlParser: true, useUnifiedTopology: true } )
-const Schema = mongoose.Schema
-
-const commentSchema = new Schema({
-    user_id:{type: String, required: true},
-    body: String,
-    image: String
-}, {collection: "comment"})
-
-const Comment = mongoose.model("comment", commentSchema)
-
+const Comment = require("./schema/comment")
 
 const app = express()
 app.use(express.json())
-// app.use(express.urlencoded({extender: false}))
+
 
 app.get("/", (req,res)=>{
     Comment.find().then((data)=>{
@@ -59,4 +48,4 @@ app.delete("/delete/:id", (req, res)=>{
         })
 })
 
-app.listen(3000, ()=> console.log("server runnging on 3000"))
+app.listen(3000, ()=> console.log("server running on 3000"))
